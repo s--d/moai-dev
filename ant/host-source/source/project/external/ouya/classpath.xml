@@ -1,0 +1,6 @@
+<!-- OUYA SDK -->
+<classpathentry kind="lib" path="libs/commons-lang-2.6.jar"/>
+<classpathentry kind="lib" path="libs/guava-r09.jar"/>
+<classpathentry kind="lib" path="libs/jackson-core-asl-1.8.4.jar"/>
+<classpathentry kind="lib" path="libs/jackson-mapper-asl-1.8.4.jar"/>
+<classpathentry kind="lib" path="libs/ouya-sdk.jar"/>
