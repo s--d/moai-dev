@@ -19,7 +19,7 @@
 # the assets directory of the bundle
 #----------------------------------------------------------------#
 
-	src_dirs=( "../../samples/anim/anim-basic" )
+	src_dirs=( "../../samples/ouya/ouya-controller" )
 	dest_dirs=(	"lua" )
 
 #----------------------------------------------------------------#

@@ -323,6 +323,11 @@
 		REGISTER_LUA_CLASS ( MOAITapjoyAndroid );
 #endif
 
+#ifndef DISABLE_OUYA
+		MOAIOuyaAndroid::Affirm ();
+		REGISTER_LUA_CLASS ( MOAIOuyaAndroid );
+#endif
+
 		AKURunBytecode ( moai_lua, moai_lua_SIZE );
 
 		inputQueue = new LockingQueue < InputEvent > ();
