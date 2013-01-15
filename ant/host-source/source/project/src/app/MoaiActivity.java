@@ -33,6 +33,15 @@ import android.view.WindowManager;
 // Moai
 import com.ziplinegames.moai.*;
 
+//================================================================//
+// Packages Specifically For the OUYA
+//================================================================//
+
+import tv.ouya.console.api.*;
+import android.view.MotionEvent;
+
+//----------------------------------------------------------------//
+
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 import java.net.URI;
@@ -310,6 +319,9 @@ public class MoaiActivity extends Activity {
 	//================================================================//
 	
 	//----------------------------------------------------------------//
+	/* The is the original onKeyDown Function
+	//----------------------------------------------------------------//
+
 	public boolean onKeyDown ( int keyCode, KeyEvent event ) {
 
 	    if ( keyCode == KeyEvent.KEYCODE_BACK ) {
@@ -322,7 +334,48 @@ public class MoaiActivity extends Activity {
 	    
 	    return super.onKeyDown ( keyCode, event );
 	}
+	*/
+
+	//================================================================//
+	// KeyEvent methods coded specifically for the OUYA
+	//================================================================//
+
+	@Override
+	public boolean onKeyDown (int keyCode, KeyEvent event) {
+	      boolean handled = OuyaController.onKeyDown(keyCode, event);
+	      int deviceId = event.getDeviceId();
+	      // Call MoaiOuya class
+	      MoaiOuya.NotifyOuyaButtonDown(keyCode, deviceId); 
+	      return handled || super.onKeyDown(keyCode, event); 
+	}
 	
+	@Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        boolean handled = OuyaController.onKeyUp(keyCode, event);
+        int deviceId = event.getDeviceId();
+        // Call MoaiOuya class
+        MoaiOuya.NotifyOuyaButtonUp(keyCode, deviceId);
+        return handled || super.onKeyUp(keyCode, event);
+    }
+
+    // Have'nt gotten this to work yet - hav'nt had much time with it either
+    public boolean onGenericMotionEvent(MotionEvent event) {
+        int odid = event.getDeviceId();
+        boolean handled = OuyaController.onGenericMotionEvent(event);
+		OuyaController c = OuyaController.getControllerByDeviceId(event.getDeviceId());
+        if (c != null) {
+           	float axisX = c.getAxisValue(OuyaController.AXIS_LS_X);
+           	float axisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
+           	float stickMag = (float) Math.sqrt(axisX * axisX + axisY * axisY);
+           	final float c_minStickDistance = 0.2f;
+           	if (stickMag >= c_minStickDistance){
+           		// Call MoaiOuya class
+           		MoaiOuya.NotifyOuyaMotionEvent(axisX, axisY, odid);
+           	}
+        }
+        return handled;
+    }
+
 	//================================================================//
 	// WindowEvent methods
 	//================================================================//
