@@ -25,8 +25,8 @@ extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonUp ( JNIE
 	MOAIOuyaAndroid::Get ().NotifyOuyaButtonUp ( code , deviceId );
 }
 
-extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj, jfloat axisX, jfloat axisY, jint deviceId ) {
-	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( axisX , axisY, deviceId );
+extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj, jfloat leftAxisX, jfloat leftAxisY, jfloat rightAxisX, jfloat rightAxisY, jint deviceId ) {
+	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( leftAxisX , leftAxisY, rightAxisX, rightAxisY,  deviceId );
 }
 
 //----------------------------------------------------------------//
@@ -64,7 +64,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int deviceId ) {
 	
 }
 
-void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float axisX, float axisY, int deviceId ) {
+void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int deviceId ) {
 
 	MOAILuaRef& callback = this->mListeners [ OUYA_MOTION_EVENT ];
 
@@ -72,11 +72,15 @@ void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float axisX, float axisY, int devi
 
 		MOAILuaStateHandle state = callback.GetSelf ();
 
-		state.Push ( axisX );
-		state.Push ( axisY );
+
+		state.Push ( leftAxisX );
+		state.Push ( leftAxisY );
+		state.Push ( rightAxisX );
+		state.Push ( rightAxisY );
 		state.Push ( deviceId );
 		
-		state.DebugCall ( 3, 0 );
+		//state.DebugCall ( 3, 0 );
+		state.DebugCall ( 5, 0 );
 
 	}
 	
