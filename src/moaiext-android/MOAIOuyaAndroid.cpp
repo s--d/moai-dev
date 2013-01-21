@@ -25,8 +25,8 @@ extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaButtonUp ( JNIE
 	MOAIOuyaAndroid::Get ().NotifyOuyaButtonUp ( code , deviceId );
 }
 
-extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj, jfloat axisX, jfloat axisY, jint deviceId ) {
-	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( axisX , axisY, deviceId );
+extern "C" void Java_com_ziplinegames_moai_MoaiOuya_AKUNotifyOuyaMotionEvent ( JNIEnv* env, jclass obj, jfloat leftAxisX, jfloat leftAxisY, jfloat rightAxisX, jfloat rightAxisY, jint deviceId ) {
+	MOAIOuyaAndroid::Get ().NotifyOuyaMotionEvent ( leftAxisX , leftAxisY, rightAxisX, rightAxisY,  deviceId );
 }
 
 //----------------------------------------------------------------//
@@ -64,7 +64,7 @@ void MOAIOuyaAndroid::NotifyOuyaButtonUp ( int keyCode, int deviceId ) {
 	
 }
 
-void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float axisX, float axisY, int deviceId ) {
+void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY, int deviceId ) {
 
 	MOAILuaRef& callback = this->mListeners [ OUYA_MOTION_EVENT ];
 
@@ -72,11 +72,15 @@ void MOAIOuyaAndroid::NotifyOuyaMotionEvent ( float axisX, float axisY, int devi
 
 		MOAILuaStateHandle state = callback.GetSelf ();
 
-		state.Push ( axisX );
-		state.Push ( axisY );
+
+		state.Push ( leftAxisX );
+		state.Push ( leftAxisY );
+		state.Push ( rightAxisX );
+		state.Push ( rightAxisY );
 		state.Push ( deviceId );
 		
-		state.DebugCall ( 3, 0 );
+		//state.DebugCall ( 3, 0 );
+		state.DebugCall ( 5, 0 );
 
 	}
 	
@@ -132,6 +136,7 @@ void MOAIOuyaAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "OUYA_BUTTON_UP",    ( u32 )OUYA_BUTTON_UP );
 	state.SetField ( -1, "OUYA_MOTION_EVENT",    ( u32 )OUYA_MOTION_EVENT );
 
+	/*
 	state.SetField ( -1, "AXIS_L2",    			( u32 )AXIS_L2 );
 	state.SetField ( -1, "AXIS_LS_X",    		( u32 )AXIS_LS_X );
 	state.SetField ( -1, "AXIS_LS_Y",    		( u32 )AXIS_LS_Y );
@@ -154,7 +159,7 @@ void MOAIOuyaAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "BUTTON_U",    		( u32 )BUTTON_U );
 	state.SetField ( -1, "BUTTON_Y",    		( u32 )BUTTON_Y );
 	state.SetField ( -1, "MAX_CONTROLLERS",		( u32 )MAX_CONTROLLERS );
-
+*/
 	luaL_Reg regTable [] = {
 		{ "setListener",	_setListener },
 		{ NULL, NULL }
