@@ -26,7 +26,7 @@ public class MoaiOuya extends Activity{
 
   protected static native void AKUNotifyOuyaButtonDown  ( int keyCode, int deviceId );
   protected static native void AKUNotifyOuyaButtonUp  ( int keyCode, int deviceId );
-  protected static native void AKUNotifyOuyaMotionEvent  ( float axisX, float axisY, int deviceId );
+  protected static native void AKUNotifyOuyaMotionEvent  ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY,  int deviceId );
 
   //----------------------------------------------------------------//
   public static void onCreate ( Activity activity ) {
@@ -51,9 +51,9 @@ public class MoaiOuya extends Activity{
     }
   }
 
-  public static void NotifyOuyaMotionEvent ( float axisX, float axisY, int deviceId ) {
+  public static void NotifyOuyaMotionEvent ( float leftAxisX, float leftAxisY, float rightAxisX, float rightAxisY,  int deviceId ) {
     synchronized (Moai.sAkuLock) {
-      AKUNotifyOuyaMotionEvent (axisX, axisY, deviceId);
+      AKUNotifyOuyaMotionEvent ( leftAxisX, leftAxisY, rightAxisX,  rightAxisY, deviceId );
     }
   }
 }

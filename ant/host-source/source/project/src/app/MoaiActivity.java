@@ -364,13 +364,18 @@ public class MoaiActivity extends Activity {
         boolean handled = OuyaController.onGenericMotionEvent(event);
 		OuyaController c = OuyaController.getControllerByDeviceId(event.getDeviceId());
         if (c != null) {
-           	float axisX = c.getAxisValue(OuyaController.AXIS_LS_X);
-           	float axisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
-           	float stickMag = (float) Math.sqrt(axisX * axisX + axisY * axisY);
+           	float leftAxisX = c.getAxisValue(OuyaController.AXIS_LS_X);
+           	float leftAxisY = c.getAxisValue(OuyaController.AXIS_LS_Y);
+           	float rightAxisX = c.getAxisValue(OuyaController.AXIS_RS_X);
+           	float rightAxisY = c.getAxisValue(OuyaController.AXIS_RS_Y);
+
+           	float leftStickMag = (float) Math.sqrt(leftAxisX * leftAxisX + leftAxisY * leftAxisY);
+           	float rightStickMag = (float) Math.sqrt(rightAxisX * rightAxisX + rightAxisY * rightAxisY);
            	final float c_minStickDistance = 0.2f;
-           	if (stickMag >= c_minStickDistance){
+
+           	if (leftStickMag >= c_minStickDistance || rightStickMag >= c_minStickDistance){
            		// Call MoaiOuya class
-           		MoaiOuya.NotifyOuyaMotionEvent(axisX, axisY, odid);
+           		MoaiOuya.NotifyOuyaMotionEvent(leftAxisX, leftAxisY, rightAxisX, rightAxisY, odid);
            	}
         }
         return handled;
