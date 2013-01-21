@@ -129,7 +129,7 @@ int MOAIOuyaAndroid::_setListener ( lua_State* L ) {
 void MOAIOuyaAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 
 	state.SetField ( -1, "OUYA_BUTTON_DOWN",    ( u32 )OUYA_BUTTON_DOWN );
-	state.SetField ( -1, "OUYA_BUTTON_UP",    ( u32 )OUYA_BUTTON_DOWN );
+	state.SetField ( -1, "OUYA_BUTTON_UP",    ( u32 )OUYA_BUTTON_UP );
 	state.SetField ( -1, "OUYA_MOTION_EVENT",    ( u32 )OUYA_BUTTON_DOWN );
 
 	/*state.SetField ( -1, "AXIS_L2",    			( u32 )AXIS_L2 );
