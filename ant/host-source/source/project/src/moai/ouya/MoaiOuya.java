@@ -38,6 +38,13 @@ public class MoaiOuya extends Activity{
   // Ouya JNI callback methods
   //================================================================//
 
+  //----//
+  public static void initializeODK ( String developerId ) {
+     // Create an OuyaFacade
+    private OuyaFacade ouyaFacade = OuyaFacade.getInstance();
+    ouyaFacade.init(this, developerId);
+  }
+
   //----------------------------------------------------------------//
   public static void NotifyOuyaButtonDown ( int keyCode, int deviceId ) {
     synchronized (Moai.sAkuLock) {

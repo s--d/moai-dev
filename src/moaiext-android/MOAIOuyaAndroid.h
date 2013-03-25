@@ -29,15 +29,14 @@
 	@const 	BUTTON_L2			Code for the left trigger button. Considered pressed when AXIS_L2 > 0.5
 	@const 	BUTTON_L3 			Code for left joystick button.
 	@const 	BUTTON_O 			Code for the O button.
+	@Const  BUTTON_MENU         Code for a short press of the system button.
 	@const 	BUTTON_R1			Code for the right bumper button. Considered pressed when AXIS_R2 > 0.5
 	@const 	BUTTON_R2			Code for the right trigger button.
 	@const 	BUTTON_R3 			Code for right joystick button.
-	@const 	BUTTON_SYSTEM		Code for the system menu button.
 	@const 	BUTTON_U 			Code for the U button.
 	@const 	BUTTON_Y 			Code for the Y button.
-	@const 	MAX_CONTROLLERS		Max Number of Controllers Supported
-
-	@const	TOTAL				No Idea
+	@const 	MAX_CONTROLLERS		Max Number of Controllers Supported.
+	@const  STICK_DEADZONE		The deadzone amount to use for the analog sticks.
 */
 class MOAIOuyaAndroid :
 	public MOAIGlobalClass < MOAIOuyaAndroid, MOAILuaObject > {
@@ -63,7 +62,7 @@ public:
 	//----------------------------------------------------------------//
 	// Controller Constants 
 
-	/**static const int AXIS_L2 = 17;
+	static const int AXIS_L2 = 17;
 	static const int AXIS_LS_X = 0;
 	static const int AXIS_LS_Y	= 1;
 	static const int AXIS_R2 = 18;
@@ -77,16 +76,18 @@ public:
 	static const int BUTTON_L1	= 102;
 	static const int BUTTON_L2	= 104;
 	static const int BUTTON_L3	= 106;
+	static const int BUTTON_MENU = 82;
 	static const int BUTTON_O	= 96;
 	static const int BUTTON_R1	= 103;
 	static const int BUTTON_R2	= 105;
 	static const int BUTTON_R3	= 107;
-	static const int BUTTON_SYSTEM	= 3;
 	static const int BUTTON_U = 99;
 	static const int BUTTON_Y = 100;
-	static const int MAX_CONTROLLERS = 4;*/	
+	static const int MAX_CONTROLLERS = 4;
+	static const float	STICK_DEADZONE = 0.25f;
 	
 	//----------------------------------------------------------------//
+
 	void    Finish                  ();
 			MOAIOuyaAndroid			();
 			~MOAIOuyaAndroid		();

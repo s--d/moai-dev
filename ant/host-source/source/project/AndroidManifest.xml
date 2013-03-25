@@ -22,12 +22,14 @@
 			android:screenOrientation= "landscape"
 			android:launchMode="singleTask"
 			android:configChanges="keyboard|keyboardHidden|orientation">
-			
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN" />
 				<category android:name="android.intent.category.LAUNCHER" />
-			</intent-filter>
+				<category android:name="tv.ouya.intent.category.GAME"/>
+    		</intent-filter>
 		</activity>
+		<activity android:name=".GameActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
+		<activity android:name=".OptionsActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"/>
 		
 		<activity 
 			android:name="com.ziplinegames.moai.MoaiMoviePlayer"
@@ -43,7 +45,7 @@
 		
 	</application>
 	
-    <uses-sdk android:minSdkVersion="8"/>
+    <uses-sdk android:minSdkVersion="16"/>
 
 	<!-- Moai -->
  	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />

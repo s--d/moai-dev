@@ -136,7 +136,6 @@ void MOAIOuyaAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "OUYA_BUTTON_UP",    ( u32 )OUYA_BUTTON_UP );
 	state.SetField ( -1, "OUYA_MOTION_EVENT",    ( u32 )OUYA_MOTION_EVENT );
 
-	/*
 	state.SetField ( -1, "AXIS_L2",    			( u32 )AXIS_L2 );
 	state.SetField ( -1, "AXIS_LS_X",    		( u32 )AXIS_LS_X );
 	state.SetField ( -1, "AXIS_LS_Y",    		( u32 )AXIS_LS_Y );
@@ -151,15 +150,16 @@ void MOAIOuyaAndroid::RegisterLuaClass ( MOAILuaState& state ) {
 	state.SetField ( -1, "BUTTON_L1",    		( u32 )BUTTON_L1 );
 	state.SetField ( -1, "BUTTON_L2",    		( u32 )BUTTON_L2 );
 	state.SetField ( -1, "BUTTON_L3",   		( u32 )BUTTON_L3 );
+	state.SetField ( -1, "BUTTON_MENU",   		( u32 )BUTTON_MENU );
 	state.SetField ( -1, "BUTTON_O",    		( u32 )BUTTON_O );
 	state.SetField ( -1, "BUTTON_R1",    		( u32 )BUTTON_R1 );
 	state.SetField ( -1, "BUTTON_R2",    		( u32 )BUTTON_R2 );
 	state.SetField ( -1, "BUTTON_R3",    		( u32 )BUTTON_R3 );
-	state.SetField ( -1, "BUTTON_SYSTEM",    	( u32 )BUTTON_SYSTEM );
 	state.SetField ( -1, "BUTTON_U",    		( u32 )BUTTON_U );
 	state.SetField ( -1, "BUTTON_Y",    		( u32 )BUTTON_Y );
 	state.SetField ( -1, "MAX_CONTROLLERS",		( u32 )MAX_CONTROLLERS );
-*/
+	state.SetField ( -1, "STICK_DEADZONE",		( float )STICK_DEADZONE );
+	
 	luaL_Reg regTable [] = {
 		{ "setListener",	_setListener },
 		{ NULL, NULL }
